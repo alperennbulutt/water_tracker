@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:water_tracker/src/constants/colors.dart';
 import 'package:water_tracker/src/constants/paddings.dart';
 
 class ElevatedButtonWidget extends StatelessWidget {

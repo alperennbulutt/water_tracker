@@ -7,7 +7,7 @@ import 'package:water_tracker/src/routes/app_pages.dart';
 
 class HomeController extends GetxController {
   final MyRepository repository;
-  HomeController({required this.repository}) : assert(repository != null);
+  HomeController({required this.repository});
 
 // photos -----------------------------------------------------------
   final _photosList = <PhotosModel>[].obs;

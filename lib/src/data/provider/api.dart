@@ -3,7 +3,6 @@ import 'package:water_tracker/src/constants/endpoints.dart';
 import 'package:water_tracker/src/data/model/model.dart';
 import 'package:water_tracker/src/data/model/photos_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:meta/meta.dart';
 
 class MyApiClient {
   late http.Client httpClient;

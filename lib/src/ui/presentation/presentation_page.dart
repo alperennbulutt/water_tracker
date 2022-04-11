@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -6,7 +5,6 @@ import 'package:water_tracker/src/constants/app_theme.dart';
 import 'package:water_tracker/src/constants/font_family.dart';
 import 'package:water_tracker/src/controller/presentation/presentation_controller.dart';
 import 'package:water_tracker/src/routes/app_pages.dart';
-import 'package:water_tracker/src/ui/home/home_page.dart';
 import 'package:water_tracker/src/widgets/custom_elevated_button.dart';
 
 class PresenttionPage extends GetView<PresentationController> {

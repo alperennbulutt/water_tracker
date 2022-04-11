@@ -1,10 +1,9 @@
 import 'package:water_tracker/src/data/provider/api.dart';
-import 'package:meta/meta.dart';
 
 class MyRepository {
   final MyApiClient apiClient;
 
-  MyRepository({required this.apiClient}) : assert(apiClient != null);
+  MyRepository({required this.apiClient});
 
   getAll() {
     return apiClient.getAll();

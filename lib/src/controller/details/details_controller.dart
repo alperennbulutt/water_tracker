@@ -4,7 +4,7 @@ import 'package:water_tracker/src/data/repository/posts_repository.dart';
 
 class DetailsController extends GetxController {
   final MyRepository repository;
-  DetailsController({required this.repository}) : assert(repository != null);
+  DetailsController({required this.repository});
 
   final _post = MyModel().obs;
   get post => this._post.value;
