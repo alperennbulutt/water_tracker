@@ -37,6 +37,7 @@ dependencies:
   meta: ^1.7.0
   http: ^0.13.4
   introduction_screen: ^3.0.2
+  firebase_core: ^1.14.0
 
 dev_dependencies:
   flutter_test:
