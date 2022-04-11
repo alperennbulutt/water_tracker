@@ -13,7 +13,7 @@ void main() {
     theme: appThemeData,
     defaultTransition: Transition.fade,
     getPages: AppPages.pages,
-    locale: Locale('pt', 'BR'),
+    locale: const Locale('pt', 'BR'),
     translationsKeys: AppTranslation.translations,
   ));
 }

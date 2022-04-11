@@ -10,37 +10,36 @@ class HomeController extends GetxController {
   HomeController({required this.repository}) : assert(repository != null);
 
 // photos -----------------------------------------------------------
-  final _photosList = List<PhotosModel>.empty().obs;
-  get photosList => this._photosList.value;
-  set photosList(value) => this._photosList.value = value;
+  final _photosList = <PhotosModel>[].obs;
+  get photosList => _photosList;
+  set photosList(value) => _photosList.value = value;
 
   final _photosModel = PhotosModel().obs;
-  get postPhotos => this._photosModel.value;
-  set postPhotos(value) => this._photosModel.value = value;
+  get postPhotos => _photosModel.value;
+  set postPhotos(value) => _photosModel.value = value;
 
 // -----------------------------------------------------------------
 
 // postModel --------------------------------------------------------
-  // ignore: deprecated_member_use
-  final _postsList = List<MyModel>.empty().obs;
-  get postList => this._postsList.value;
-  set postList(value) => this._postsList.value = value;
+  final _postsList = <MyModel>[].obs;
+  get postList => _postsList;
+  set postList(value) => _postsList.value = value;
 
   final _post = MyModel().obs;
-  get post => this._post.value;
-  set post(value) => this._post.value = value;
+  get post => _post.value;
+  set post(value) => _post.value = value;
 
   // ---------------------------------------------------------------
 
   getAll() {
     repository.getAll().then((data) {
-      this.postList = data;
+      postList = data;
     });
   }
 
   getPhotos() {
     repository.getPhotos().then((data) {
-      this.photosList = data;
+      photosList = data;
     });
   }
 
@@ -49,8 +48,8 @@ class HomeController extends GetxController {
     Get.toNamed(Routes.SECONDPAGE);
   }
 
-  details(post) {
-    this.post = post;
+  details(value) {
+    post = value;
     Get.toNamed(Routes.DETAILS);
   }
 }

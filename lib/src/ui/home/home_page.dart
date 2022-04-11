@@ -6,11 +6,13 @@ import 'package:water_tracker/src/routes/app_pages.dart';
 
 class HomePage extends GetView<HomeController> {
   late PhotosModel photosModel;
+
+  HomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Title"),
+        title: const Text("Ana Sayfa"),
       ),
       body: Container(
         child: GetX<HomeController>(initState: (state) {
@@ -18,7 +20,7 @@ class HomePage extends GetView<HomeController> {
           // Get.find<HomeController>().getAll();
         }, builder: (_) {
           return _.photosList.length < 1
-              ? CircularProgressIndicator()
+              ? Center(child: const CircularProgressIndicator())
               : ListView.builder(
                   itemBuilder: (context, index) {
                     return GestureDetector(
@@ -35,7 +37,11 @@ class HomePage extends GetView<HomeController> {
                           Expanded(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text(_.photosList[index].title)],
+                              children: [
+                                Text(_.photosList[index].title == null
+                                    ? 'Veri Yok'
+                                    : _.photosList[index].title)
+                              ],
                             ),
                           ),
                         ],

@@ -29,7 +29,7 @@ class ElevatedButtonWidget extends StatelessWidget {
               if (states.contains(MaterialState.disabled))
                 return Color.fromRGBO(204, 215, 227, 1);
 
-              return Colors.amber;
+              return Colors.blue;
             },
           ),
           foregroundColor: MaterialStateProperty.resolveWith<Color>(
