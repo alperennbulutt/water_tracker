@@ -4,6 +4,7 @@ import 'package:water_tracker/src/controller/home/home_controller.dart';
 import 'package:water_tracker/src/data/model/photos_model.dart';
 import 'package:water_tracker/src/routes/app_pages.dart';
 
+// ignore: must_be_immutable
 class HomePage extends GetView<HomeController> {
   late PhotosModel photosModel;
 
