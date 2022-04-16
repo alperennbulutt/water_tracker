@@ -3,17 +3,31 @@ import 'package:get/get.dart';
 import 'package:water_tracker/src/controller/home/home_controller.dart';
 import 'package:water_tracker/src/data/model/photos_model.dart';
 import 'package:water_tracker/src/routes/app_pages.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:intl/intl.dart';
 
-// ignore: must_be_immutable
 class HomePage extends GetView<HomeController> {
   late PhotosModel photosModel;
 
   HomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final now = new DateTime.now();
+    String formatter = DateFormat('yMd').format(now);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Ana Sayfa"),
+        title: Text(formatter),
+        toolbarHeight: 110,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        flexibleSpace: ClipPath(
+          clipper: WaveClipperTwo(),
+          child: Container(
+            height: 250,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.blue,
+          ),
+        ),
       ),
       body: Container(
         child: GetX<HomeController>(initState: (state) {

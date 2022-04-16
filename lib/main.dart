@@ -13,7 +13,7 @@ Future<void> main() async {
 
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: Routes.INITIAL,
+    initialRoute: Routes.CHOOSEGENDERPAGE,
     theme: appThemeData,
     defaultTransition: Transition.fade,
     getPages: AppPages.pages,
