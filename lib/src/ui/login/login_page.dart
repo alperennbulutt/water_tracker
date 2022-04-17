@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:water_tracker/src/utils/device/device_utils.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -18,33 +19,38 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: Column(
-        children: [
-          SvgPicture.asset("assets/login/water_drop.svg"),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Username',
+      body: SingleChildScrollView(
+        child: GestureDetector(
+          onTap: () => DeviceUtils.hideKeyboard(context),
+          child: Column(
+            children: [
+              SvgPicture.asset("assets/login/water_drop.svg"),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Username',
+                  ),
+                ),
               ),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Password',
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Password',
+                  ),
+                ),
               ),
-            ),
+              ElevatedButton(
+                style: style,
+                onPressed: () {},
+                child: const Text('Giriş Yap'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            style: style,
-            onPressed: () {},
-            child: const Text('Giriş Yap'),
-          ),
-        ],
+        ),
       ),
     );
   }
