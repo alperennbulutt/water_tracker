@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
 
 import 'package:water_tracker/src/controller/details/details_controller.dart';
-import 'package:water_tracker/src/data/provider/api.dart';
-import 'package:water_tracker/src/data/repository/posts_repository.dart';
+import 'package:water_tracker/src/repository/posts_repository.dart';
+
+import '../services/api.dart';
 
 class DetailsBinding implements Bindings {
   @override

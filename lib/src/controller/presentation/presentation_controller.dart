@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:water_tracker/src/data/repository/presentation_repository.dart';
+
+import '../../repository/presentation_repository.dart';
 
 class PresentationController extends GetxController {
   final PresentationRepository repository;

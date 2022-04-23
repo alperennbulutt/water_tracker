@@ -1,4 +1,4 @@
-import 'package:water_tracker/src/data/provider/api.dart';
+import '../services/api.dart';
 
 class MyRepository {
   final MyApiClient apiClient;
