@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:water_tracker/src/controller/home/home_controller.dart';
 import 'package:water_tracker/src/data/model/photos_model.dart';
-import 'package:water_tracker/src/routes/app_pages.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:intl/intl.dart';
+import 'package:water_tracker/src/utils/routes/app_pages.dart';
 
 class HomePage extends GetView<HomeController> {
   late PhotosModel photosModel;

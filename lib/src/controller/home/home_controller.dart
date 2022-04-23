@@ -3,7 +3,7 @@ import 'package:water_tracker/src/data/model/model.dart';
 import 'package:water_tracker/src/data/model/photos_model.dart';
 
 import 'package:water_tracker/src/data/repository/posts_repository.dart';
-import 'package:water_tracker/src/routes/app_pages.dart';
+import 'package:water_tracker/src/utils/routes/app_pages.dart';
 
 class HomeController extends GetxController {
   final MyRepository repository;
