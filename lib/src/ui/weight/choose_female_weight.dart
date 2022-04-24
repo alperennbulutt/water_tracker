@@ -1,10 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../widgets/custom_gradient_text.dart';
 
 class ChooseFemaleWeight extends StatelessWidget {
   const ChooseFemaleWeight({Key? key}) : super(key: key);

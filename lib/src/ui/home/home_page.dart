@@ -1,17 +1,17 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:water_tracker/src/controller/home/home_controller.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/photos_model.dart';
 
-// ignore: must_be_immutable
-class HomePage extends GetView<HomeController> {
+class HomePage extends StatelessWidget {
   late PhotosModel photosModel;
 
   HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final now = new DateTime.now();
