@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:water_tracker/src/repository/login/login_repo.dart';
 
@@ -11,7 +12,16 @@ class LoginControllerController extends GetxController {
 
   // sign in
   Future signIn(String email, String password) async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email.trim(), password: password.trim());
+    Get.dialog(Center(
+      child: CircularProgressIndicator(),
+    ));
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email.trim(), password: password.trim());
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+    Get.back();
   }
 }

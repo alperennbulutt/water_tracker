@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:water_tracker/src/controller/login/login_controller.dart';
 import 'package:water_tracker/src/repository/login/login_repo.dart';
 import 'package:water_tracker/src/services/api.dart';
+import 'package:water_tracker/src/utils/routes/app_pages.dart';
 
 import '../../utils/device/device_utils.dart';
 
@@ -48,14 +49,28 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Hesabınız yok mu?'),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  GestureDetector(
+                    onTap: () => Get.toNamed(Routes.REGISTERPAGE),
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
               ElevatedButton(
                 style: style,
                 onPressed: () {
-                  print('username : ' + usernameController.value.text);
-                  print('password : ' + passwordController.value.text);
-                  controller.userName.value = usernameController.value.text;
-                  controller.password.value = passwordController.value.text;
-
                   controller.signIn(usernameController.value.text.trim(),
                       passwordController.value.text.trim());
                 },

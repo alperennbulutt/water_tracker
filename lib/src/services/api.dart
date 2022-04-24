@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:water_tracker/src/constants/endpoints.dart';
 import 'package:http/http.dart' as http;
 
