@@ -1,18 +1,14 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../widgets/custom_gradient_text.dart';
 
-class ChooseGender extends StatefulWidget {
-  const ChooseGender({Key? key}) : super(key: key);
+class ChooseFemaleWeight extends StatelessWidget {
+  const ChooseFemaleWeight({Key? key}) : super(key: key);
 
-  @override
-  _ChooseGenderState createState() => _ChooseGenderState();
-}
-
-class _ChooseGenderState extends State<ChooseGender> {
-  final ButtonStyle style =
-      ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,34 +20,37 @@ class _ChooseGenderState extends State<ChooseGender> {
         children: [
           Align(
             child: SvgPicture.asset(
-              "assets/gender/choose_gender.svg",
+              "assets/weight/female/weight_gauge.svg",
             ),
           ),
           SizedBox(
             height: 20,
           ),
           Align(
-            child: GradientText(
-              'Choose your Gender',
-              style: const TextStyle(fontSize: 20),
-              gradient: LinearGradient(colors: [
-                Color.fromRGBO(27, 174, 238, 1),
-                Color.fromRGBO(255, 69, 147, 1),
-              ]),
+              child: Text(
+            'Kilonuzu kg cinsinden giriniz',
+            style: TextStyle(
+              color: Color.fromRGBO(255, 69, 147, 1),
+              fontWeight: FontWeight.bold,
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
+          )),
           Row(
             children: [
               Expanded(
                   child: Align(
-                child: SvgPicture.asset("assets/gender/choose_male.svg"),
+                child: SvgPicture.asset("assets/weight/female/water_drop.svg"),
               )),
               Expanded(
-                  child: Align(
-                child: SvgPicture.asset("assets/gender/choose_female.svg"),
+                  child: SizedBox(
+                height: 200,
+                child: CupertinoPicker(
+                    itemExtent: 50,
+                    onSelectedItemChanged: (index) {},
+                    children: [
+                      Center(child: Text("Cemile")),
+                      Center(child: Text("Beyza")),
+                      Center(child: Text("Düzen"))
+                    ]),
               )),
             ],
           ),

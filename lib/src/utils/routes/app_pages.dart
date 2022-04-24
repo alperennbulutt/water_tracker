@@ -10,6 +10,8 @@ import 'package:water_tracker/src/ui/login/login_page.dart';
 import 'package:water_tracker/src/ui/my_app.dart';
 import 'package:water_tracker/src/ui/presentation/presentation_page.dart';
 import 'package:water_tracker/src/ui/register/register_page.dart';
+import 'package:water_tracker/src/ui/weight/choose_female_weight.dart';
+import 'package:water_tracker/src/ui/weight/choose_male_weight.dart';
 
 part 'app_route_names.dart';
 
@@ -17,6 +19,14 @@ class AppPages {
   static final pages = [
     // MyApp page
     GetPage(name: Routes.MyApp, page: () => MyApp(), binding: MyAppBinding()),
+    GetPage(
+        name: Routes.CHOOSEMALEWEIGHTPAGE,
+        page: () => ChooseMaleWeight(),
+        binding: PresentationBinding()),
+    GetPage(
+        name: Routes.CHOOSEFEMALEWEIGHTPAGE,
+        page: () => ChooseFemaleWeight(),
+        binding: PresentationBinding()),
     GetPage(
         name: Routes.CHOOSEGENDERPAGE,
         page: () => ChooseGender(),

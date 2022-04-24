@@ -13,7 +13,7 @@ Future<void> main() async {
 
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: Routes.MyApp,
+    initialRoute: Routes.HOME,
     theme: appThemeData,
     defaultTransition: Transition.fade,
     getPages: AppPages.pages,

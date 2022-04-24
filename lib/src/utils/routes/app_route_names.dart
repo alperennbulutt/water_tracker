@@ -9,4 +9,6 @@ abstract class Routes {
   static const LOGINPAGE = "/login";
   static const REGISTERPAGE = "/register";
   static const CHOOSEGENDERPAGE = "/choosegender";
+  static const CHOOSEFEMALEWEIGHTPAGE = "/choosefemaleweight";
+  static const CHOOSEMALEWEIGHTPAGE = "/choosemaleweight";
 }
