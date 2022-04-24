@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:water_tracker/src/controller/register/register_controller.dart';
+import 'package:water_tracker/src/repository/register/register_repo.dart';
+import 'package:water_tracker/src/services/api.dart';
+import 'package:water_tracker/src/utils/routes/app_pages.dart';
 
 import '../../widgets/custom_gradient_text.dart';
 
-class ChooseGender extends StatefulWidget {
-  const ChooseGender({Key? key}) : super(key: key);
-
-  @override
-  _ChooseGenderState createState() => _ChooseGenderState();
-}
-
-class _ChooseGenderState extends State<ChooseGender> {
-  final ButtonStyle style =
-      ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+class ChooseGender extends StatelessWidget {
+  final controller = Get.put(RegisterController(
+      repository: RegisterRepository(apiClient: MyApiClient())));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,11 +45,15 @@ class _ChooseGenderState extends State<ChooseGender> {
             children: [
               Expanded(
                   child: Align(
-                child: SvgPicture.asset("assets/gender/choose_male.svg"),
+                child: GestureDetector(
+                    onTap: () => controller.gender.value = 'Male',
+                    child: SvgPicture.asset("assets/gender/choose_male.svg")),
               )),
               Expanded(
                   child: Align(
-                child: SvgPicture.asset("assets/gender/choose_female.svg"),
+                child: GestureDetector(
+                    onTap: () => controller.gender.value = 'Female',
+                    child: SvgPicture.asset("assets/gender/choose_female.svg")),
               )),
             ],
           ),
@@ -83,7 +85,11 @@ class _ChooseGenderState extends State<ChooseGender> {
                                 RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ))),
-                    onPressed: () {},
+                    onPressed: () async {
+                      await controller.saveLocalRegisterInformations();
+                      Get.toNamed(Routes.CHOOSEFEMALEWEIGHTPAGE);
+                      // localStorage.saveString(LocalStorageConstants.gender, )
+                    },
                     child: const Text('NEXT'),
                   ),
                 ))

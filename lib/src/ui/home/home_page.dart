@@ -8,7 +8,6 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import '../../models/photos_model.dart';
 
-// ignore: must_be_immutable
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
 

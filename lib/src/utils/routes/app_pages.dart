@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:water_tracker/src/bindings/details_binding.dart';
+import 'package:water_tracker/src/bindings/gender_binging.dart';
 import 'package:water_tracker/src/bindings/home_binding.dart';
 import 'package:water_tracker/src/bindings/my_app_binding.dart';
 import 'package:water_tracker/src/bindings/presentation_binding.dart';
@@ -30,7 +31,7 @@ class AppPages {
     GetPage(
         name: Routes.CHOOSEGENDERPAGE,
         page: () => ChooseGender(),
-        binding: PresentationBinding()),
+        binding: GenderBinding()),
     GetPage(
         name: Routes.REGISTERPAGE,
         page: () => RegisterPage(),

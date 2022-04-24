@@ -2,16 +2,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:water_tracker/src/constants/local_storage_constants.dart';
+import 'package:water_tracker/src/data/local_storage.dart';
 import 'package:water_tracker/src/repository/register/register_repo.dart';
 import '../../constants/firebase_constants.dart';
 
 class RegisterController extends GetxController {
   final RegisterRepository repository;
   RegisterController({required this.repository});
+  final localStorage = LocalStorage();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final email = ''.obs;
   final userName = ''.obs;
   final password = ''.obs;
   final confirmPassword = ''.obs;
+  final gender = ''.obs;
 
   // get user id
   getCurrentUserId() {
@@ -52,5 +57,16 @@ class RegisterController extends GetxController {
       },
       // SetOptions(merge: true),
     );
+  }
+
+  // save local storage user information
+  saveLocalRegisterInformations() {
+    print('gelen veri' + email.value);
+    print('gelen veri' + userName.value);
+    print('gelen veri' + gender.value);
+
+    localStorage.saveString(LocalStorageConstants.email, email.value);
+    localStorage.saveString(LocalStorageConstants.userName, userName.value);
+    localStorage.saveString(LocalStorageConstants.gender, gender.value);
   }
 }

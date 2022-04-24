@@ -41,7 +41,9 @@ class ChooseFemaleWeight extends StatelessWidget {
                 height: 200,
                 child: CupertinoPicker(
                     itemExtent: 50,
-                    onSelectedItemChanged: (index) {},
+                    onSelectedItemChanged: (index) {
+                      print(index);
+                    },
                     children: [
                       Center(child: Text("Cemile")),
                       Center(child: Text("Beyza")),

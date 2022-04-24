@@ -73,6 +73,7 @@ class LoginPage extends StatelessWidget {
                 onPressed: () {
                   controller.signIn(usernameController.value.text.trim(),
                       passwordController.value.text.trim());
+                  Get.toNamed(Routes.HOME);
                 },
                 child: const Text('Giriş Yap'),
               ),
