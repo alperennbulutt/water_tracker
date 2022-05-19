@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:water_tracker/src/constants/local_storage_constants.dart';
 import 'package:water_tracker/src/controller/register/register_controller.dart';
 import 'package:water_tracker/src/data/local_storage.dart';
 import 'package:water_tracker/src/repository/register/register_repo.dart';
