@@ -6,8 +6,6 @@ import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
-import 'package:water_tracker/src/ui/details-x/details_page.dart';
-import 'package:water_tracker/src/utils/routes/app_pages.dart';
 
 import '../../models/photos_model.dart';
 
@@ -36,7 +34,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
-            onTap: () => FirebaseAuth.instance.signOut(),
+            onTap: () => {
+                  FirebaseAuth.instance.signOut(),
+                },
             child: Icon(Icons.logout)),
         title: Text(formatter),
         toolbarHeight: 90,
@@ -218,35 +218,6 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ],
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        onTap: (value) {
-          print(value.toString());
-          if (value == 0) {
-            Get.toNamed(Routes.HOME);
-          } else if (value == 1) {
-            Get.toNamed(Routes.CHOOSEFEMALEWEIGHTPAGE);
-          }
-        },
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Anasayfa',
-              backgroundColor: Colors.blue),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart_outlined),
-            label: 'İstatistikler',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Ayarlar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.switch_account),
-            label: 'Profil',
           ),
         ],
       ),

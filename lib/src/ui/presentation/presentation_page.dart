@@ -62,7 +62,7 @@ class PresenttionPage extends GetView<PresentationController> {
                 text: 'Haydi Başlayalım!',
                 onPressed: () {
                   print('pressed');
-                  Get.toNamed(Routes.HOME);
+                  Get.toNamed(Routes.LOGINPAGE);
                 },
               )),
         ],
