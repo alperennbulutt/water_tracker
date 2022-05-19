@@ -3,8 +3,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:water_tracker/src/ui/details-x/details_page.dart';
+import 'package:water_tracker/src/utils/routes/app_pages.dart';
 
 import '../../models/photos_model.dart';
 
@@ -50,7 +53,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          Row(children: [
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             SfRadialGauge(axes: <RadialAxis>[
               RadialAxis(
                   minimum: 0,
@@ -69,8 +72,8 @@ class _HomePageState extends State<HomePage> {
                         width: 25,
                         sizeUnit: GaugeSizeUnit.logicalPixel,
                         gradient: const SweepGradient(colors: <Color>[
-                          Color(0xFFCC2B5E),
-                          Color(0xFF753A88)
+                          Color(0XFFBBDEFB),
+                          Color(0xFF1565C0)
                         ], stops: <double>[
                           0.25,
                           0.75
@@ -82,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                         markerHeight: 34,
                         markerWidth: 34,
                         markerType: MarkerType.circle,
-                        color: Color(0xFF753A88),
+                        color: Color(0xFF0D47A1),
                         borderWidth: 2,
                         borderColor: Colors.white54)
                   ],
@@ -95,39 +98,155 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(
                                 fontSize: 40,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFFCC2B5E))))
+                                color: Color(0xFF536DFE))))
                   ])
             ]),
           ]),
           Row(
             children: [
-              Column(
-                children: [
-                  Text("günlük hedef"),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text("tamamlanan"),
-                ],
+              Expanded(
+                flex: 5,
+                child: Column(
+                  children: [
+                    Card(
+                      child: Column(
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'Günlük Hedef',
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6)),
+                                  ),
+                                  Text("2000 mL")
+                                ],
+                              )),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-              Column()
+              Expanded(
+                flex: 5,
+                child: Column(
+                  children: [
+                    Card(
+                      child: Column(
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'Tamamlanan',
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6)),
+                                  ),
+                                  Text("1000 mL")
+                                ],
+                              )),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
             ],
-          )
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              ElevatedButton(
+                style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.blue)))),
+                child: Row(children: [Icon(Icons.add), Text("Ekle")]),
+                onPressed: () {
+                  showModalBottomSheet<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        height: 200,
+                        color: Colors.white,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              const Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 16),
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    hintText:
+                                        'İçtiğiniz Su Miktarını Giriniz...',
+                                  ),
+                                ),
+                              ),
+                              const Text(
+                                '(1 Su Bardağı : 200 mL)',
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18.0),
+                                            side: BorderSide(
+                                                color: Colors.blue)))),
+                                child: const Text('Kaydet'),
+                                onPressed: () => Get.back(),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        onTap: (value) {
+          print(value.toString());
+          if (value == 0) {
+            Get.toNamed(Routes.HOME);
+          } else if (value == 1) {
+            Get.toNamed(Routes.CHOOSEFEMALEWEIGHTPAGE);
+          }
+        },
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Anasayfa',
+              backgroundColor: Colors.blue),
+          BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart_outlined),
-            label: '',
+            label: 'İstatistikler',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.camera),
-            label: 'Camera',
+            icon: Icon(Icons.settings),
+            label: 'Ayarlar',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Chats',
+            icon: Icon(Icons.switch_account),
+            label: 'Profil',
           ),
         ],
       ),
