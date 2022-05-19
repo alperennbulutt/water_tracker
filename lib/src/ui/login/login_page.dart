@@ -32,6 +32,11 @@ class LoginPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child: TextField(
+                  onChanged: (value) {
+                    if (value.length <= 0) {
+                      print('hiçbir veriniz yok');
+                    }
+                  },
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Username',
@@ -43,6 +48,11 @@ class LoginPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child: TextField(
                   controller: passwordController,
+                  onChanged: (value) {
+                    if (value.length <= 0) {
+                      print('hiçbir veriniz yok');
+                    }
+                  },
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Password',
@@ -71,9 +81,19 @@ class LoginPage extends StatelessWidget {
               ElevatedButton(
                 style: style,
                 onPressed: () {
-                  controller.signIn(usernameController.value.text.trim(),
-                      passwordController.value.text.trim());
-                  Get.toNamed(Routes.HOME);
+                  if (usernameController.value.text.length > 0 &&
+                      passwordController.value.text.length > 0) {
+                    controller.signIn(usernameController.value.text.trim(),
+                        passwordController.value.text.trim());
+                  } else {
+                    showDialog(
+                        context: context,
+                        builder: (ctxt) => new AlertDialog(
+                              title: Text(
+                                  "Kullanıcı adı veya şifre girilmemiş!",
+                                  textAlign: TextAlign.center),
+                            ));
+                  }
                 },
                 child: const Text('Giriş Yap'),
               ),
