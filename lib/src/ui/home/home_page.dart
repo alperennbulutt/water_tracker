@@ -172,44 +172,54 @@ class _HomePageState extends State<HomePage> {
                 child: Row(children: [Icon(Icons.add), Text("Ekle")]),
                 onPressed: () {
                   showModalBottomSheet<void>(
+                    isScrollControlled: true,
                     context: context,
                     builder: (BuildContext context) {
-                      return Container(
-                        height: 200,
-                        color: Colors.white,
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              const Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 16),
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    hintText:
-                                        'İçtiğiniz Su Miktarını Giriniz...',
+                      return Padding(
+                        padding: EdgeInsets.only(
+                            top: 20,
+                            right: 20,
+                            left: 20,
+                            bottom: MediaQuery.of(context).viewInsets.bottom),
+                        child: Container(
+                          height: 200,
+                          color: Colors.white,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 16),
+                                  child: TextField(
+                                    autofocus: true,
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      hintText:
+                                          'İçtiğiniz Su Miktarını Giriniz...',
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const Text(
-                                '(1 Su Bardağı : 200 mL)',
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                              ElevatedButton(
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18.0),
-                                            side: BorderSide(
-                                                color: Colors.blue)))),
-                                child: const Text('Kaydet'),
-                                onPressed: () => Get.back(),
-                              )
-                            ],
+                                const Text(
+                                  '(1 Su Bardağı : 200 mL)',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18.0),
+                                              side: BorderSide(
+                                                  color: Colors.blue)))),
+                                  child: const Text('Kaydet'),
+                                  onPressed: () => Get.back(),
+                                ),
+                                //  SizedBox(height: 10),
+                              ],
+                            ),
                           ),
                         ),
                       );
