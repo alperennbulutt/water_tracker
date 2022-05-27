@@ -1,34 +1,21 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:water_tracker/src/controller/home/home_controller.dart';
+import 'package:water_tracker/src/repository/posts_repository.dart';
+import 'package:water_tracker/src/services/api.dart';
 
-import '../../models/photos_model.dart';
-
-class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  late PhotosModel photosModel;
-
-  double _volumeValue = 50;
-
-  void onVolumeChanged(double value) {
-    setState(() {
-      _volumeValue = value;
-    });
-  }
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(
+        HomeController(repository: MyRepository(apiClient: MyApiClient())));
+
     final now = new DateTime.now();
     String formatter = DateFormat('yMd').format(now);
     return Scaffold(
@@ -54,53 +41,57 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            SfRadialGauge(axes: <RadialAxis>[
-              RadialAxis(
-                  minimum: 0,
-                  maximum: 100,
-                  showLabels: false,
-                  showTicks: false,
-                  radiusFactor: 0.7,
-                  axisLineStyle: AxisLineStyle(
-                      cornerStyle: CornerStyle.bothCurve,
-                      color: Colors.black12,
-                      thickness: 25),
-                  pointers: <GaugePointer>[
-                    RangePointer(
-                        value: _volumeValue,
+            Obx(
+              () => SfRadialGauge(axes: <RadialAxis>[
+                RadialAxis(
+                    minimum: 0,
+                    maximum: 100,
+                    showLabels: false,
+                    showTicks: false,
+                    radiusFactor: 0.7,
+                    axisLineStyle: AxisLineStyle(
                         cornerStyle: CornerStyle.bothCurve,
-                        width: 25,
-                        sizeUnit: GaugeSizeUnit.logicalPixel,
-                        gradient: const SweepGradient(colors: <Color>[
-                          Color(0XFFBBDEFB),
-                          Color(0xFF1565C0)
-                        ], stops: <double>[
-                          0.25,
-                          0.75
-                        ])),
-                    MarkerPointer(
-                        value: _volumeValue,
-                        enableDragging: true,
-                        onValueChanged: onVolumeChanged,
-                        markerHeight: 34,
-                        markerWidth: 34,
-                        markerType: MarkerType.circle,
-                        color: Color(0xFF0D47A1),
-                        borderWidth: 2,
-                        borderColor: Colors.white54)
-                  ],
-                  annotations: <GaugeAnnotation>[
-                    GaugeAnnotation(
-                        angle: 90,
-                        axisValue: 5,
-                        positionFactor: 0.2,
-                        widget: Text(_volumeValue.ceil().toString() + '%',
-                            style: TextStyle(
-                                fontSize: 40,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF536DFE))))
-                  ])
-            ]),
+                        color: Colors.black12,
+                        thickness: 25),
+                    pointers: <GaugePointer>[
+                      RangePointer(
+                          value: controller.volumeValue.value,
+                          cornerStyle: CornerStyle.bothCurve,
+                          width: 25,
+                          sizeUnit: GaugeSizeUnit.logicalPixel,
+                          gradient: const SweepGradient(colors: <Color>[
+                            Color(0XFFBBDEFB),
+                            Color(0xFF1565C0)
+                          ], stops: <double>[
+                            0.25,
+                            0.75
+                          ])),
+                      MarkerPointer(
+                          value: controller.volumeValue.value,
+                          enableDragging: true,
+                          onValueChanged: controller.onVolumeChanged,
+                          markerHeight: 34,
+                          markerWidth: 34,
+                          markerType: MarkerType.circle,
+                          color: Color(0xFF0D47A1),
+                          borderWidth: 2,
+                          borderColor: Colors.white54)
+                    ],
+                    annotations: <GaugeAnnotation>[
+                      GaugeAnnotation(
+                          angle: 90,
+                          axisValue: 5,
+                          positionFactor: 0.2,
+                          widget: Text(
+                              controller.volumeValue.value.ceil().toString() +
+                                  '%',
+                              style: TextStyle(
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF536DFE))))
+                    ])
+              ]),
+            ),
           ]),
           Row(
             children: [
@@ -193,7 +184,9 @@ class _HomePageState extends State<HomePage> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 8, vertical: 16),
                                   child: TextField(
+                                    // controller: controller.waterGoalsTextEditingController.value,
                                     autofocus: true,
+                                    keyboardType: TextInputType.number,
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(),
                                       hintText:
@@ -215,9 +208,17 @@ class _HomePageState extends State<HomePage> {
                                               side: BorderSide(
                                                   color: Colors.blue)))),
                                   child: const Text('Kaydet'),
-                                  onPressed: () => Get.back(),
+                                  onPressed: () => {
+                                    controller.waterGoals.value =
+                                        controller.volumeValue.value * 2,
+                                    Get.back(),
+                                    Get.defaultDialog(
+                                      onConfirm: () => Get.back(),
+                                      title: 'Kayıt Edildi',
+                                      middleText: "Su miktarınız ayarlanmıştır",
+                                    ),
+                                  },
                                 ),
-                                //  SizedBox(height: 10),
                               ],
                             ),
                           ),

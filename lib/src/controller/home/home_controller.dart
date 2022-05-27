@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:water_tracker/src/utils/routes/app_pages.dart';
 
@@ -8,6 +9,19 @@ import '../../repository/posts_repository.dart';
 class HomeController extends GetxController {
   final MyRepository repository;
   HomeController({required this.repository});
+
+  final Rx<TextEditingController> waterGoalsTextEditingController =
+      TextEditingController().obs;
+
+  // volume Value
+  var volumeValue = 0.0.obs;
+
+  void onVolumeChanged(double value) {
+    volumeValue.value = value;
+  }
+
+  // water goals value
+  final waterGoals = 0.0.obs;
 
 // photos -----------------------------------------------------------
   final _photosList = <PhotosModel>[].obs;
