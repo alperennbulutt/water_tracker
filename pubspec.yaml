@@ -48,6 +48,8 @@ dependencies:
   syncfusion_flutter_gauges: ^20.1.50
   get_storage: ^2.0.3
   charts_flutter: ^0.10.0
+  firebase_messaging: ^11.4.1
+  flutter_local_notifications: ^9.5.3+1
 
 dev_dependencies:
   flutter_test:
