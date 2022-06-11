@@ -5,6 +5,7 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('bildirim sayfasına düştü');
     return Scaffold(
       body: Column(children: [Text('Notification came!!')]),
     );

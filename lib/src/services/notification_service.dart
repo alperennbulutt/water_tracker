@@ -25,6 +25,7 @@ class NotificationService {
 
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: (String? payload) async {
+      print('payload burada yazacak' + payload.toString());
       showDialog(
         context: navigatorKey.currentState!.context,
         builder: (context) => NotificationPage(),
