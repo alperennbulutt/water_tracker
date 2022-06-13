@@ -6,7 +6,8 @@ import 'package:water_tracker/src/ui/notification/notification_page.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
-late AndroidNotificationChannel channel;
+late AndroidNotificationChannel channel = AndroidNotificationChannel(
+    "water_tracker_notification_channel", "Water Tracker");
 
 class NotificationService {
   Future<void> init(
@@ -32,11 +33,11 @@ class NotificationService {
       );
     });
 
-    channel = const AndroidNotificationChannel(
-      'water_tracker_notification_channel', // id
-      'Water Tracker', // title // description
-      importance: Importance.defaultImportance,
-    );
+    // channel = const AndroidNotificationChannel(
+    //   'water_tracker_notification_channel', // id
+    //   'Water Tracker', // title // description
+    //   importance: Importance.defaultImportance,
+    // );
 
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
