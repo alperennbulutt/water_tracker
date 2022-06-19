@@ -8,13 +8,18 @@ class LocalStorage {
     localStorage.remove(key);
   }
 
+  // remove all local value
+  removeAllLovalValue() {
+    localStorage.erase();
+  }
+
 // String ---------------------------------------------------------------
   saveString(String key, String value) {
     localStorage.write(key, value);
   }
 
   String getString(String key) {
-    return localStorage.read(key);
+    return localStorage.read(key) == null ? '' : localStorage.read(key);
   }
 
   // boolean ------------------------------------------------------------
@@ -23,7 +28,7 @@ class LocalStorage {
   }
 
   getBoolean(key) {
-    return localStorage.read(key);
+    return localStorage.read(key) == null ? false : localStorage.read(key);
   }
   // ------------------------------------------------------------------------
 
@@ -33,8 +38,19 @@ class LocalStorage {
   }
 
   int getInt(key) {
-    return localStorage.read(key);
+    return localStorage.read(key) == null ? 0 : localStorage.read(key);
   }
+
+  // double ----------------------------------------------------------------------
+  saveDouble(String key, double value) {
+    localStorage.write(key, value);
+  }
+
+  double getDouble(key) {
+    return localStorage.read(key) == null ? 0.0 : localStorage.read(key);
+  }
+
+  // ------------------------------------------------------------------------------
 
   // Array ------------------------------------------------------------------------
   saveArray(String key, List value) {
@@ -42,6 +58,6 @@ class LocalStorage {
   }
 
   List getList(key) {
-    return localStorage.read(key);
+    return localStorage.read(key) == null ? [] : localStorage.read(key);
   }
 }

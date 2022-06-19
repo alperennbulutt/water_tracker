@@ -2,12 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:intl/intl.dart';
+import 'package:water_tracker/src/data/local_storage.dart';
+
+import '../../constants/local_storage_constants.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final localStorage = LocalStorage();
     final now = new DateTime.now();
     String formatter = DateFormat('yMd').format(now);
     return Scaffold(
@@ -15,6 +19,7 @@ class ProfilePage extends StatelessWidget {
         leading: GestureDetector(
             onTap: () => {
                   FirebaseAuth.instance.signOut(),
+                  // localStorage.removeAllLovalValue(),
                 },
             child: Icon(Icons.logout)),
         title: Text(formatter),
@@ -44,21 +49,17 @@ class ProfilePage extends StatelessWidget {
           height: 30,
         ),
         Text(
-          "Cemile Beyza",
+          "Kullanıcı adı : ${localStorage.getString(LocalStorageConstants.userName)}",
           style: TextStyle(fontWeight: FontWeight.w300, fontSize: 15),
         ),
         SizedBox(
           height: 20,
         ),
-        Text(
-          "Düzen",
-          style: TextStyle(fontWeight: FontWeight.w300, fontSize: 15),
-        ),
         SizedBox(
           height: 20,
         ),
         Text(
-          "46 kg",
+          "Kullanıcı Kilosu: ${localStorage.getInt(LocalStorageConstants.weight)}",
           style: TextStyle(fontWeight: FontWeight.w300, fontSize: 15),
         )
       ]),

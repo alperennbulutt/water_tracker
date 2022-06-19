@@ -183,7 +183,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          'Günlük içilen su miktarı',
+                          'İçilen Su Miktarı Analizi',
                           style: TextStyle(
                               fontSize: 24.0, fontWeight: FontWeight.bold),
                         ),
