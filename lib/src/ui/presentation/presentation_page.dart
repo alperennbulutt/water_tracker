@@ -3,13 +3,16 @@ import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:water_tracker/src/constants/app_theme.dart';
 import 'package:water_tracker/src/constants/font_family.dart';
+import 'package:water_tracker/src/constants/local_storage_constants.dart';
 import 'package:water_tracker/src/controller/presentation/presentation_controller.dart';
+import 'package:water_tracker/src/data/local_storage.dart';
 import 'package:water_tracker/src/utils/routes/app_pages.dart';
 import 'package:water_tracker/src/widgets/custom_elevated_button.dart';
 
 class PresenttionPage extends GetView<PresentationController> {
   @override
   Widget build(BuildContext context) {
+    final localStorage = LocalStorage();
     PageDecoration pageDecoration = PageDecoration(
       titleTextStyle: TextStyle(
         fontSize: 21,
@@ -61,13 +64,19 @@ class PresenttionPage extends GetView<PresentationController> {
               footer: ElevatedButtonWidget(
                 text: 'Haydi Başlayalım!',
                 onPressed: () {
+                  localStorage.saveBoolean(
+                      LocalStorageConstants.isPresentationPageWatched, true);
                   print('pressed');
                   Get.toNamed(Routes.LOGINPAGE);
                 },
               )),
         ],
         done: Text('Atla', style: TextStyle(fontWeight: FontWeight.w600)),
-        onDone: () => Get.toNamed(Routes.INITIAL),
+        onDone: () => {
+          localStorage.saveBoolean(
+              LocalStorageConstants.isPresentationPageWatched, true),
+          Get.toNamed(Routes.INITIAL),
+        },
         showSkipButton: true,
         skip: Text(
           'Atla',

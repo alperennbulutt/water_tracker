@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:water_tracker/src/constants/local_storage_constants.dart';
 import 'package:water_tracker/src/controller/register/register_controller.dart';
+import 'package:water_tracker/src/data/local_storage.dart';
 import 'package:water_tracker/src/repository/register/register_repo.dart';
 import 'package:water_tracker/src/services/api.dart';
 import 'package:water_tracker/src/utils/routes/app_pages.dart';
@@ -9,6 +11,9 @@ import 'package:water_tracker/src/utils/routes/app_pages.dart';
 import '../../widgets/custom_gradient_text.dart';
 
 class ChooseGender extends StatelessWidget {
+  // local storage
+  final localStorage = LocalStorage();
+
   final controller = Get.put(RegisterController(
       repository: RegisterRepository(apiClient: MyApiClient())));
   @override
@@ -46,13 +51,27 @@ class ChooseGender extends StatelessWidget {
               Expanded(
                   child: Align(
                 child: GestureDetector(
-                    onTap: () => controller.gender.value = 'Male',
+                    onTap: () => {
+                          {
+                            controller.gender.value = 'Male',
+                            Get.defaultDialog(
+                                title: 'Tebrikler',
+                                onConfirm: () => Get.back(),
+                                middleText: "Cinsiyetinizi seçtiniz"),
+                          },
+                        },
                     child: SvgPicture.asset("assets/gender/choose_male.svg")),
               )),
               Expanded(
                   child: Align(
                 child: GestureDetector(
-                    onTap: () => controller.gender.value = 'Female',
+                    onTap: () => {
+                          controller.gender.value = 'Female',
+                          Get.defaultDialog(
+                              title: 'Tebrikler',
+                              onConfirm: () => Get.back(),
+                              middleText: "Cinsiyetinizi seçtiniz"),
+                        },
                     child: SvgPicture.asset("assets/gender/choose_female.svg")),
               )),
             ],
@@ -63,6 +82,23 @@ class ChooseGender extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Row(
               children: [
+                // Expanded(
+                //     child: Align(
+                //   child: ElevatedButton(
+                //     style: ButtonStyle(
+                //         shape:
+                //             MaterialStateProperty.all<RoundedRectangleBorder>(
+                //                 RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(18.0),
+                //     ))),
+                //     onPressed: () async {
+                //       await localStorage
+                //           .removeLocalValue(LocalStorageConstants.gender);
+                //     },
+                //     child: Icon(Icons.arrow_back_ios),
+                //   ),
+                // )),
+                Expanded(child: SizedBox()),
                 Expanded(
                     child: Align(
                   child: ElevatedButton(
@@ -72,24 +108,18 @@ class ChooseGender extends StatelessWidget {
                                 RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ))),
-                    onPressed: () {},
-                    child: Icon(Icons.arrow_back_ios),
-                  ),
-                )),
-                Expanded(
-                    child: Align(
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ))),
-                    onPressed: () async {
-                      await controller.saveLocalRegisterInformations();
-                      Get.toNamed(Routes.CHOOSEFEMALEWEIGHTPAGE);
-                      // localStorage.saveString(LocalStorageConstants.gender, )
-                    },
+                    onPressed: controller.isSelectedGender.value != ''
+                        ? () async {
+                            print('selected gender:' + controller.gender.value);
+                            await controller.saveLocalRegisterInformations();
+                            localStorage.saveString(
+                                LocalStorageConstants.gender,
+                                controller.gender.value);
+
+                            Get.toNamed(Routes.CHOOSEFEMALEWEIGHTPAGE);
+                            // localStorage.saveString(LocalStorageConstants.gender, )
+                          }
+                        : null,
                     child: const Text('NEXT'),
                   ),
                 ))

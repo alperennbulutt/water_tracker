@@ -111,6 +111,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             confirmPasswordController.text) {
                           await controller.signUp(
                               emailController.text, passwordController.text);
+                          await controller.createUser(
+                            emailController.text,
+                            userNameController.text,
+                          );
                           controller.saveLocalRegisterInformations();
 
                           Get.toNamed(Routes.CHOOSEGENDERPAGE);

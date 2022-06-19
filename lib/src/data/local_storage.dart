@@ -17,6 +17,16 @@ class LocalStorage {
     return localStorage.read(key);
   }
 
+  // boolean ------------------------------------------------------------
+  saveBoolean(String key, bool value) {
+    localStorage.write(key, value);
+  }
+
+  getBoolean(key) {
+    return localStorage.read(key);
+  }
+  // ------------------------------------------------------------------------
+
 // int  ------------------------------------------------------------------------
   saveInt(String key, int value) {
     localStorage.write(key, value);

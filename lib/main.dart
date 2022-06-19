@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
+import 'package:water_tracker/src/constants/local_storage_constants.dart';
+import 'package:water_tracker/src/data/local_storage.dart';
 import 'package:water_tracker/src/firebase_config.dart';
 import 'package:water_tracker/src/utils/routes/app_pages.dart';
 import 'package:water_tracker/src/utils/translations/app_translations.dart';
@@ -25,8 +27,12 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.platformOptions,
   );
 
+  final localStorage = LocalStorage();
+
   final fcmToken = await FirebaseMessaging.instance.getToken();
   print('fcm token:' + fcmToken.toString());
+  localStorage.saveString(
+      LocalStorageConstants.deviceToken, fcmToken.toString());
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 

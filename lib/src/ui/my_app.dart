@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:water_tracker/src/services/notification_service.dart';
 import 'package:water_tracker/src/ui/dashboard/dashboard_page.dart';
 import 'package:water_tracker/src/ui/notification/notification_page.dart';
-import 'login/login_page.dart';
+import 'package:water_tracker/src/ui/presentation/presentation_page.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -150,7 +150,7 @@ class _MyAppState extends State<MyApp> {
           if (snapshot.hasData) {
             return DashboardPage();
           } else {
-            return LoginPage();
+            return PresenttionPage();
           }
         },
       ),

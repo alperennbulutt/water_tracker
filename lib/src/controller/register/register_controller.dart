@@ -17,6 +17,7 @@ class RegisterController extends GetxController {
   final password = ''.obs;
   final confirmPassword = ''.obs;
   final gender = ''.obs;
+  final isSelectedGender = false.obs;
 
   // get user id
   getCurrentUserId() {
@@ -41,8 +42,7 @@ class RegisterController extends GetxController {
   }
 
   // save user information
-  void createUser(
-      String email, String name, String surname, String dailyActivity) {
+  createUser(String email, String name) {
     String userId = getCurrentUserId();
     FirebaseFirestore.instance
         .collection(FirestoreConstants.users)
@@ -52,10 +52,25 @@ class RegisterController extends GetxController {
         FirestoreConstants.email: email,
         FirestoreConstants.userId: userId,
         FirestoreConstants.name: name,
-        FirestoreConstants.surname: surname,
-        FirestoreConstants.dailyActivity: dailyActivity
+        // FirestoreConstants.surname: surname,
+        // FirestoreConstants.dailyActivity: dailyActivity
       },
       // SetOptions(merge: true),
+    );
+  }
+
+  updaUserInformation(String gender, int weight) {
+    String userId = getCurrentUserId();
+
+    FirebaseFirestore.instance
+        .collection(FirestoreConstants.users)
+        .doc(userId)
+        .set(
+      {
+        FirestoreConstants.gender: gender,
+        FirestoreConstants.weight: weight,
+      },
+      SetOptions(merge: true),
     );
   }
 
